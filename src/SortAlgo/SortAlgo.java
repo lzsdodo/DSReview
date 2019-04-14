@@ -1,7 +1,5 @@
 package SortAlgo;
 
-import java.util.Random;
-
 public class SortAlgo {
 
     public static int[] bubbleSort(int[] arr) {
@@ -73,9 +71,10 @@ public class SortAlgo {
     }
 
     public static void mergeSort(int[] arr) {
-        // 1. Not in place sort
+        // 1. Not in place sort, Space: O(n)
         // 2. Not-Stability
-        // 3. Time-Avg: O(nlogn), Space: O(n)
+        // 3. Time-Avg: O(nlogn)
+        // BOTTOM TO TOP
         mergeSort(arr, 0, arr.length - 1);
     }
 
@@ -115,6 +114,10 @@ public class SortAlgo {
     }
 
     public static void quickSort(int[] arr) {
+        // 1. In place sort, Space: O(1)
+        // 2. Not-Stability
+        // 3. Time-Avg: O(nlogn), Worst: O(n^2) depending on the `pivot` value
+        // TOP to BOTTOM
         quickSort(arr, 0, arr.length - 1);
     }
 
@@ -146,6 +149,25 @@ public class SortAlgo {
     }
 
     public static int[] bucketSort(int[] arr) {
+        // Bucket sorting is more suitable for external sorting
+        // Like the data is 100GB and the RAM limitation is 1G.
+        // O(k * logk) = O(m * k * logk) = O(m * n/m * log(n/m)) = O(n * log(n/m))
+        // When n ≈ m => O(n)
         return null;
     }
+
+    public static int[] countingSort(int[] arr) {
+        // A special case of bucket sort
+        // Small range and all data are all non-negative number
+        // 1. find the range of data
+        // 2. record the #
+        // 3. build a new arr according to the record
+        return null;
+    }
+
+    public static int[] radixSort(int[] arr) {
+        // e.g. Sort phone number / words / ...
+        return null;
+    }
+
 }
