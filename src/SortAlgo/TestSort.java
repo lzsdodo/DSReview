@@ -20,7 +20,7 @@ public class TestSort {
                 SortAlgo.insertionSort(Arrays.copyOf(data, data.length))));
 
         out.println("Selection Sort: " + Arrays.toString(
-                SortAlgo.selectSort(Arrays.copyOf(data, data.length))));
+                SortAlgo.selectionSort(Arrays.copyOf(data, data.length))));
 
         int[] msArr = Arrays.copyOf(data, data.length);
         SortAlgo.mergeSort(msArr);

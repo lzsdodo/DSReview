@@ -6,15 +6,14 @@ public class SortAlgo {
         // 1. In place sort
         // 2. Stability
         // 3. Best: O(n), Worst: O(n^2)
-        int len = arr.length;
-        if (len <= 1) return arr;
+        if (arr.length <= 1) return arr;
 
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < arr.length; i++) {
             boolean swapped = false;
 
-            for (int j = 0; j < len - 1; j++) {
-                if (arr[i] < arr[j]) {
-                    swap(arr, i, j);
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j + 1] < arr[j]) {
+                    swap(arr, j, j + 1);
                     swapped = true;
                 }
             }
@@ -28,10 +27,9 @@ public class SortAlgo {
         // 1. In place sort
         // 2. Stability
         // 3. Best: O(n), Worst: O(n^2)
-        int len = arr.length;
-        if (len <= 1) return arr;
+        if (arr.length <= 1) return arr;
 
-        for (int i = 1; i < len; i++) {
+        for (int i = 1; i < arr.length; i++) {
             int val = arr[i];
             int j = i - 1;
             // Find out where to insert
@@ -45,18 +43,17 @@ public class SortAlgo {
         return arr;
     }
 
-    public static int[] selectSort(int[] arr) {
+    public static int[] selectionSort(int[] arr) {
         // 1. In place sort
         // 2. Not-Stability
         // 3. Best: O(n), Worst: O(n^2)
-        int len = arr.length;
-        if (len <= 1) return arr;
+        if (arr.length <= 1) return arr;
 
-        for (int i = 0; i < len - 1; i++) {
+        for (int i = 0; i < arr.length - 1; i++) {
             int min = arr[i];
             int minIdx = i;
 
-            for (int j = i + 1; j < len; j++) {
+            for (int j = i + 1; j < arr.length; j++) {
                 if (arr[j] < min) {
                     min = arr[j];
                     minIdx = j;
@@ -75,6 +72,7 @@ public class SortAlgo {
         // 2. Not-Stability
         // 3. Time-Avg: O(nlogn)
         // BOTTOM TO TOP
+        if (arr.length < 2) return;
         mergeSort(arr, 0, arr.length - 1);
     }
 
@@ -118,6 +116,7 @@ public class SortAlgo {
         // 2. Not-Stability
         // 3. Time-Avg: O(nlogn), Worst: O(n^2) depending on the `pivot` value
         // TOP to BOTTOM
+        if (arr.length < 2) return;
         quickSort(arr, 0, arr.length - 1);
     }
 
@@ -142,6 +141,18 @@ public class SortAlgo {
         return divIdx;
     }
 
+    /*
+    private static int findPivot(int[] arr, int low, int high) {
+        int nMid = arr[low + ((high - low) / 2)];
+        int[] num = new int[]{arr[low], nMid, arr[high]};
+        // 3 point median
+        if (num[0] > num[1]) swap(num, 0, 1);
+        if (num[1] > num[2]) swap(num, 1, 2);
+        if (num[0] > num[1]) swap(num, 0, 1);
+        return num[1];
+    }
+    */
+
     private static void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];
@@ -156,13 +167,54 @@ public class SortAlgo {
         return null;
     }
 
-    public static int[] countingSort(int[] arr) {
+    public static void countingSort(int[] arr) {
         // A special case of bucket sort
         // Small range and all data are all non-negative number
         // 1. find the range of data
         // 2. record the #
         // 3. build a new arr according to the record
-        return null;
+
+        // 计数排序，a 是数组，n 是数组大小。假设数组中存储的都是非负整数。
+        // Code src: https://github.com/wangzheng0822/algo/blob/master/java/13_sorts/CountingSort.java
+        if (arr.length <= 1) return;
+
+        // 查找数组中数据的范围
+        int max = arr[0];
+        for (int i = 1; i < arr.length; ++i) {
+            if (max < arr[i]) {
+                max = arr[i];
+            }
+        }
+
+        // 申请一个计数数组 c，下标大小 [0,max]
+        int[] c = new int[max + 1];
+        for (int i = 0; i < max + 1; ++i) {
+            c[i] = 0;
+        }
+
+        // 计算每个元素的个数，放入 c 中
+        for (int i = 0; i < arr.length; ++i) {
+            c[arr[i]]++;
+        }
+
+        // 依次累加
+        for (int i = 1; i < max + 1; ++i) {
+            c[i] = c[i-1] + c[i];
+        }
+
+        // 临时数组 r，存储排序之后的结果
+        int[] r = new int[arr.length];
+        // 计算排序的关键步骤了，有点难理解
+        for (int i = arr.length - 1; i >= 0; --i) {
+            int index = c[arr[i]]-1;
+            r[index] = arr[i];
+            c[arr[i]]--;
+        }
+
+        // 将结果拷贝会 a 数组
+        for (int i = 0; i < arr.length; ++i) {
+            arr[i] = r[i];
+        }
     }
 
     public static int[] radixSort(int[] arr) {
