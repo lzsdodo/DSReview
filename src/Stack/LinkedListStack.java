@@ -15,12 +15,12 @@ public class LinkedListStack implements MyStack {
     }
 
     @Override
-    public void push(Object e) {
+    public void push(Object obj) {
         if (size == 0) {
-            dummy.next = new ListNode(e);
+            dummy.next = new ListNode(obj);
             tail = dummy.next;
         } else {
-            tail.next = new ListNode(e);
+            tail.next = new ListNode(obj);
             tail = tail.next;
         }
         size++;

@@ -5,11 +5,13 @@ public class HashTable {
     // get(), put(), remove(), size(), isEmpty(), ...
     // I prefer to see the source code for now
 
+    /*
     int hash(Object key) {
         int h = key.hashCode();
         // capitity means hash table's size here
         return (h ^ (h >>> 16)) & (capitity -1);
     }
+    */
 
 
     // String's hashCode in Java

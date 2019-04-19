@@ -1,7 +1,11 @@
 package Array;
 
 import static java.lang.System.out;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class TestArray {
 
@@ -18,6 +22,20 @@ public class TestArray {
         testArrayAlgo();
         out.println("===== ===== ===== =====");
 
+        testCollectionsSort();
+    }
+
+    private static void testCollectionsSort() {
+        List<Integer> arrList = new ArrayList<>();
+        arrList.add(1);
+        arrList.add(3);
+        arrList.add(2);
+        out.println(Arrays.toString(arrList.toArray()));
+
+        Collections.sort(arrList);
+        out.println(Arrays.toString(arrList.toArray()));
+        Collections.reverse(arrList);
+        out.println(Arrays.toString(arrList.toArray()));
     }
 
     private static void testDynamicArray() {
