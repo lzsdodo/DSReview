@@ -141,39 +141,30 @@ public class BST {
     // Pred & Succ in BST (inorder)
     public TreeNode findPredNode(TreeNode target) {
         TreeNode node = find(target);
-        // case 1: Find left max
-        if (node.left != null)
-            return findMax(node.left);
+        
+        if (node.left != null) return findMax(node.left);
 
-        // case 2: node is its father's succ
         TreeNode father = findFather(node);
-        if (father != null && node == father.right)
-            return father;
-
-        // case 3: find a left side father
-        while (father != null && node != father.right) {
-            node = father;
+        while (father != null && node == father.left) {
+            node   = father;
             father = findFather(node);
-            // if father node is an attr of TreeNode,
-            // it would be more easier
         }
-        return node;
+        
+        return father;
     }
 
     public TreeNode findSuccNode(TreeNode root, TreeNode target) {
         TreeNode node = find(target);
-        if (node.right != null)
-            return findMin(node);
+        
+        if (node.right != null) return findMin(node);
 
         TreeNode father = findFather(node);
-        if (father != null && node == father.left)
-            return father;
-
-        while (father != null && node != father.left) {
-            node = father;
+        while (father != null && node == father.right) {
+            node   = father;
             father = findFather(node);
         }
-        return node;
+        
+        return father;
     }
 
     public List<Integer> toList(TreeNode root) {
