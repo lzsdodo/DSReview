@@ -1,2 +1,3 @@
 # DSReview
-Implement by Java
+
+> Moved to another repo.
